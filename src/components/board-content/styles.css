@@ -1,0 +1,15 @@
+.list-container {
+  background-color: #f1f2f4;
+  width: 25%;
+  height: 100%;
+  padding: 0.5rem 0.8rem;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.create-task-button {
+  position: fixed !important;
+  bottom: 5%;
+  right: 2%;
+  z-index: 99;
+}
