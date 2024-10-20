@@ -42,8 +42,8 @@ function CardSlider() {
     };
 
     return (
-        <Box sx={{ width: '80%', margin: '50px', padding: '20px' }}>
-            <Slider {...sliderSettings}>
+        <Box sx={{  margin: '50px', padding: '20px'}}>
+            <Slider {...sliderSettings} >
                 {cardData.map((card) => (
                     <Box key={card.id} px={2}>
                         <Card>

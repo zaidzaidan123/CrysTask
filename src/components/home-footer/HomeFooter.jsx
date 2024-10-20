@@ -11,7 +11,7 @@ const HomeFooter = () => {
             sx={{
                 backgroundColor: '#265DB6',
                 color: 'white',
-                padding: '40px 0',  //top-bottom left-right
+                padding: '40px 0'
             }}
         >
             <Container maxWidth="lg">
