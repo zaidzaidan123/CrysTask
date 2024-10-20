@@ -8,7 +8,7 @@ const BoardContent = () => {
   const listHeadings = ["To Do", "In Progress", "QA", "Done"];
   return (
     <>
-      <Stack direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
+      <Stack sx = {{marginLeft : 4}} direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
         {listHeadings.map((header, index) => {
           return <ListContainer header={header} key={index} />;
         })}
