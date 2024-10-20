@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Sign-in } from './pages/Sign-in';
-import { Sign-up } from './pages/Sign-up';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/Sign-up';
 //import { landingPage} from './pages/landingPage';
 export const Routes = () => {
     return (
         <Router>
             <Switch>
                 <Route path="/">
-                    <Sign-in/>
+                    <SignIn/>
                 </Route>
                 <Route path="/:signUpId">
-                <Sign-up/>
+                <SignUp/>
                 </Route>
                 <Route path="/pages/App.jsx">
                     <app/>

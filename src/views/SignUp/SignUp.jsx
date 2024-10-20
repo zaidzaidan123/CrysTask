@@ -1,5 +1,4 @@
 import React from 'react'
-import Grid from '@mui/material/Grid';
 import { Avatar, Button, Grid2, Paper, TextField, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Radio from '@mui/material/Radio';
@@ -8,10 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useNavigate } from "react-router-dom";
 
-//import '../App.css';
-//import SignIn from "./Sign-in";
 function SignUp() {
     const paperStyle = { padding: '30px 20px', width: 300, margin: "20px auto" }
     const headerStyle = { margin: 0 }
