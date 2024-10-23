@@ -36,6 +36,11 @@ const BoardContent = () => {
             setTaskTitle("")
             setTaskDescription("")
         }
+        else
+        {
+            window.alert("Set title to the task!")
+        }
+
 
         closeModal()
     }
@@ -67,7 +72,7 @@ const BoardContent = () => {
 
     return (
         <>
-            <Stack direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
+            <Stack sx={{marginLeft: 2}} direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
 
                 {columns.map((col, index) => {
                     return <ListContainer header={col.header} key={index} tasks={col.tasks}
