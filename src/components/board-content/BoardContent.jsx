@@ -36,7 +36,7 @@ const BoardContent = () => {
             setTaskTitle("")
             setTaskDescription("")
         }
-        
+
         closeModal()
     }
 
