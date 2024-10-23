@@ -3,25 +3,25 @@ import { Stack,Button,Card } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import "./styles.css";
+import Task from "./Task";
 
-const ListContainer = ({ header }) => {
+const ListContainer = ({ header,tasks, moveTask, fromColumn }) => {
   return (
     <>
       <Stack className="list-container" gap={2}>
         <h4>{header}</h4>
         <Stack gap={2}>
-          <Button sx={{ padding: 0, textAlign: "left" }}>
-            <Card sx={{ width: "100%" }}>
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  Title
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Description
-                </Typography>
-              </CardContent>
-            </Card>
-          </Button>
+          {tasks ?  tasks.map((task, index) => (
+            <Task key={index} title={task.title} description={task.description} onClick={()=> {
+                const confirm = window.confirm(`please confirm moving "${task.title}"`)
+                if(confirm) {
+                    if (fromColumn === "To Do") moveTask(task, "To Do", "In Progress")
+                    if (fromColumn === "In Progress") moveTask(task, "In Progress", "QA")
+                    if (fromColumn === "QA") moveTask(task, "QA", "Done")
+                }
+            }
+            }  />
+          )) : console.log("emptylist")}
         </Stack>
       </Stack>
     </>

@@ -9,24 +9,69 @@ import "./styles.css";
 const BoardContent = () => {
 
     const [open,setOpen ] = useState(false);
-    const [taskTitle, setTaskTitle] = useState("Title");
-    const [taskDescription, setTaskDescription] = useState("Description");
+    const [taskTitle, setTaskTitle] = useState("");
+    const [taskDescription, setTaskDescription] = useState("");
+
+    const [toDoArr,setToDoArr] = useState([])
+    const [inProgressArr,setInProgressArr] = useState([])
+    const [qaArr,setQaArr] = useState([])
+    const [doneArr,setDoneArr] = useState([])
 
     const openModal = () => { setOpen(true); };
     const closeModal = () => { setOpen(false); };
 
     const handelModalSubmit = () => {
+
         console.log("New task title: ", taskTitle);
         console.log("New task description: ", taskDescription)
+
+        if(taskTitle !== "") {
+            const newTask = {
+                title: taskTitle,
+                description: taskDescription,
+            }
+            setToDoArr((arr) => [...arr, newTask])
+
+            //reseting props!!
+            setTaskTitle("")
+            setTaskDescription("")
+        }
+        
         closeModal()
     }
 
-  const listHeadings = ["To Do", "In Progress", "QA", "Done"];
+    const moveTask = (task, fromColumn, toColumn) => {
+        if (fromColumn ==="To Do") setToDoArr((tasks) =>
+            tasks.filter((t) => t !==task));
+
+        if (fromColumn ==="In Progress") setInProgressArr((tasks) =>
+            tasks.filter((t) => t !==task));
+
+        if (fromColumn === "QA") setQaArr((tasks) =>
+            tasks.filter((t) => t !==task));
+
+        if (fromColumn === "Done") setDoneArr((tasks) =>
+            tasks.filter((t) => t !==task));
+
+        if (toColumn === "To Do") setToDoArr((arr) => [...arr, task]);
+        if (toColumn === "In Progress") setInProgressArr((arr) => [...arr,task]);
+        if (toColumn === "QA") setQaArr((arr) => [...arr,task]);
+        if (toColumn ==="Done") setDoneArr((arr) => [...arr,task]);
+    };
+
+    const columns = [{header:"To Do", tasks: toDoArr},
+      {header:"In Progress",tasks: inProgressArr},
+      {header:"QA",tasks:qaArr},
+      {header:"Done",tasks:doneArr}];
+
+
   return (
     <>
       <Stack direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
-        {listHeadings.map((header, index) => {
-          return <ListContainer header={header} key={index} />;
+
+        {columns.map((col, index) => {
+          return <ListContainer header={col.header} key={index} tasks={col.tasks}
+                                moveTask={moveTask} fromColumn = {col.header}/>;
         })}
       </Stack>
       <Button variant="contained" className="create-task-button" onClick={openModal}>
