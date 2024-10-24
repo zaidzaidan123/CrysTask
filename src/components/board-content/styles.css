@@ -7,9 +7,15 @@
   border-radius: 5px;
 }
 
-.create-task-button {
+.create-task-button{
   position: fixed !important;
   bottom: 5%;
   right: 2%;
   z-index: 99;
+}
+
+.move-ahead-button{
+  bottom: 5%;
+  left: 50%;
+
 }
