@@ -46,22 +46,31 @@ const BoardContent = () => {
     }
 
     const moveTask = (task, fromColumn, toColumn) => {
-        if (fromColumn ==="To Do") setToDoArr((tasks) =>
-            tasks.filter((t) => t !==task));
+        // if (fromColumn ==="To Do") setToDoArr((tasks) =>
+        //     tasks.filter((t) => t !==task));
+        //
+        // if (fromColumn ==="In Progress") setInProgressArr((tasks) =>
+        //     tasks.filter((t) => t !==task));
+        //
+        // if (fromColumn === "QA") setQaArr((tasks) =>
+        //     tasks.filter((t) => t !==task));
+        //
+        // if (fromColumn === "Done") setDoneArr((tasks) =>
+        //     tasks.filter((t) => t !==task));
+        //
+        // if (toColumn === "To Do") setToDoArr((arr) => [...arr, task]);
+        // if (toColumn === "In Progress") setInProgressArr((arr) => [...arr,task]);
+        // if (toColumn === "QA") setQaArr((arr) => [...arr,task]);
+        // if (toColumn ==="Done") setDoneArr((arr) => [...arr,task]);
 
-        if (fromColumn ==="In Progress") setInProgressArr((tasks) =>
-            tasks.filter((t) => t !==task));
+        switch(fromColumn){
+            case "To Do":
+                setToDoArr((tasks) => tasks.filter((t) => t !==task));
+                setInProgressArr((arr) => [...arr,task]);
+                break;
 
-        if (fromColumn === "QA") setQaArr((tasks) =>
-            tasks.filter((t) => t !==task));
+        }
 
-        if (fromColumn === "Done") setDoneArr((tasks) =>
-            tasks.filter((t) => t !==task));
-
-        if (toColumn === "To Do") setToDoArr((arr) => [...arr, task]);
-        if (toColumn === "In Progress") setInProgressArr((arr) => [...arr,task]);
-        if (toColumn === "QA") setQaArr((arr) => [...arr,task]);
-        if (toColumn ==="Done") setDoneArr((arr) => [...arr,task]);
     };
 
     const columns = [{header:"To Do", tasks: toDoArr},
