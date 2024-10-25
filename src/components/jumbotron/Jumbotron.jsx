@@ -1,6 +1,6 @@
 import { Paper, Typography, Container, Box } from '@mui/material';
 import logo from '../../../public/logo_crystask.png';
-
+import Stack from '@mui/material/Stack';
 const Jumbotron = () => {
     return (
         <Paper
@@ -13,9 +13,8 @@ const Jumbotron = () => {
             }}
         >
             <Container>
-                <Box
+                <Stack
                     sx={{
-                        display: 'flex',
                         justifyContent: 'center',
                         marginBottom: '20px',
                     }}
@@ -25,7 +24,7 @@ const Jumbotron = () => {
                         alt="logo"
                         style={{ width: '150px', height: 'auto' }}
                     />
-                </Box>
+                </Stack>
 
                 {/* Main content */}
                 <Box>
