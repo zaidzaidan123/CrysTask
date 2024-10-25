@@ -12,10 +12,7 @@ const BoardContent = () => {
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
 
-    const [toDoArr,setToDoArr] = useState([])
-    const [inProgressArr,setInProgressArr] = useState([])
-    const [qaArr,setQaArr] = useState([])
-    const [doneArr,setDoneArr] = useState([])
+    const [tasksArr,setTasksArr] = useState([]);
 
     const openModal = () => { setOpen(true); };
     const closeModal = () => { setOpen(false); };
@@ -27,10 +24,12 @@ const BoardContent = () => {
 
         if(taskTitle !== "") {
             const newTask = {
+                id:Date.now(),
                 title: taskTitle,
                 description: taskDescription,
+                status:"To Do",
             }
-            setToDoArr((arr) => [...arr, newTask])
+            setTasksArr((arr) => [...arr, newTask])
 
             //reseting props!!
             setTaskTitle("")
@@ -45,38 +44,29 @@ const BoardContent = () => {
         closeModal()
     }
 
-    const moveTask = (task, fromColumn, toColumn) => {
-        // if (fromColumn ==="To Do") setToDoArr((tasks) =>
-        //     tasks.filter((t) => t !==task));
-        //
-        // if (fromColumn ==="In Progress") setInProgressArr((tasks) =>
-        //     tasks.filter((t) => t !==task));
-        //
-        // if (fromColumn === "QA") setQaArr((tasks) =>
-        //     tasks.filter((t) => t !==task));
-        //
-        // if (fromColumn === "Done") setDoneArr((tasks) =>
-        //     tasks.filter((t) => t !==task));
-        //
-        // if (toColumn === "To Do") setToDoArr((arr) => [...arr, task]);
-        // if (toColumn === "In Progress") setInProgressArr((arr) => [...arr,task]);
-        // if (toColumn === "QA") setQaArr((arr) => [...arr,task]);
-        // if (toColumn ==="Done") setDoneArr((arr) => [...arr,task]);
+    const moveTask = (taskId, currentStatus) => {
+        const statuses = ["To Do", "In Progress", "QA", "Done"];
+        const currentIndex = statuses.indexOf(currentStatus);
 
-        switch(fromColumn){
-            case "To Do":
-                setToDoArr((tasks) => tasks.filter((t) => t !==task));
-                setInProgressArr((arr) => [...arr,task]);
-                break;
+        if (currentIndex < statuses.length - 1) {
+            const nextStatus = statuses[currentIndex + 1];
 
+            setTasksArr((prevTasks) => {
+                const updatedTasks = prevTasks.map((task) =>
+                    task.id === taskId ? { ...task, status: nextStatus } : task
+                );
+
+                console.log("Updated Tasks Array:", updatedTasks);
+                return updatedTasks;
+            });
+        } else {
+            console.log("Task is already at the final status:", currentStatus);
         }
-
     };
 
-    const columns = [{header:"To Do", tasks: toDoArr},
-        {header:"In Progress",tasks: inProgressArr},
-        {header:"QA",tasks:qaArr},
-        {header:"Done",tasks:doneArr}];
+
+
+    const columns = ["To Do", "In Progress","QA","Done"];
 
 
     return (
@@ -84,8 +74,10 @@ const BoardContent = () => {
             <Stack sx={{marginLeft: 2}} direction={"row"} width={"75vw"} gap={2} min-height={"100vh"}>
 
                 {columns.map((col, index) => {
-                    return <ListContainer header={col.header} key={index} tasks={col.tasks}
-                                          moveTask={moveTask} fromColumn = {col.header}/>;
+                    return <ListContainer header={col} key={index}
+                                          tasks={tasksArr.filter((task)=>task.status===col)}
+                                          moveTask={moveTask}
+                                            fromColumn={col}/>;
                 })}
             </Stack>
             <Button variant="contained" className="create-task-button" onClick={openModal}>
